@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 // 2. 把可变的部分抽象成prop参数
 
 
-const BarChart = () => {
+const BarChart = ({ title }) => {
   const chartRef = useRef(null)
   useEffect(() => {
     //保证dom可用 才进行图标的渲染
@@ -18,7 +18,7 @@ const BarChart = () => {
     //3. 准备图表参数
     const option = {
       title: {
-        test: '三大框架满意度'
+        test: title
       },
       xAxis: {
         type: 'category',
