@@ -1,4 +1,4 @@
-# Project Name
+# JIKE Article Management System
 
 ## Overview
 
@@ -95,7 +95,34 @@ The main directories and files in this project are as follows:
 ## Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone <repository-url>
    cd <repository-folder>
    ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Run the application**:
+   ```bash
+   npm start
+   ```
+
+## Usage
+
+- **Login Credentials**: Use the following credentials to log in:
+
+  - **Phone Number**: `18000000002`
+  - **Verification Code**: `246810`
+
+- **Authentication**: User authentication is managed with the `AuthRoute` component.
+
+- **API Requests**: The `request.js` file manages API calls and includes methods for handling tokens and error responses.
+
+- **Custom Hooks**: `useChannel` custom hook is used for real-time data management, such as WebSocket connections.
+
+## Contributing
+
+Feel free to submit issues or pull requests to improve the project.
