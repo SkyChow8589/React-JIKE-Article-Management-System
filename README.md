@@ -97,8 +97,8 @@ The main directories and files in this project are as follows:
 1. **Clone the repository**:
 
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/SkyChow8589/React-JIKE-Article-Management-System.git
+   cd React-JIKE-Article-Management-System
    ```
 
 2. **Install dependencies**:
