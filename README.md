@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Project Name
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a web application built with [React](https://reactjs.org/). The application features various pages such as Home, Article, Publish, Login, and Layout, with integrated state management, protected routes, and API utilities.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **User Authentication**: Includes login and protected routes.
+- **Data Visualization**: Displays data using charts.
+- **State Management**: Manages user state, token storage, and API integration.
+- **Responsive Design**: Styled using SCSS for a consistent UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The main directories and files in this project are as follows:
 
-### `npm test`
+### 1. Main App Files
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **`App.js`**: The main application component that configures and renders major page components.
+- **`index.js`**: Entry file, rendering the root component into the DOM.
 
-### `npm run build`
+### 2. API Files (`src/apis`)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **`article.js`**: Provides methods related to article management, such as fetching the article list, deleting, and updating.
+- **`user.js`**: Contains user-related API functions, such as user login and fetching user information.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Components (`src/components`)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **`AuthRoute.js`**: A higher-order component for route protection. It ensures that only authenticated users can access protected routes by checking the user state in Redux.
 
-### `npm run eject`
+### 4. Custom Hooks (`src/hooks`)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **`useChannel.js`**: A custom React hook to retrieve and handle the channel list data, used across components that display or filter by channels.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 5. Pages (`src/pages`)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **`Article/index.js`**: Article management page, which includes:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  - **Article List**: Displays a list of articles in a table format, showing details like cover image, title, status, publication date, view count, comments, and likes.
+  - **Filter Function**: Filters articles based on status, channel, and publication date.
+  - **Pagination**: Implements pagination for large article lists.
+  - **Delete Function**: Allows articles to be deleted via an API call.
 
-## Learn More
+- **`Home/index.js`**: Home page, primarily displaying data in charts.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  - **BarChart Component**: Used to show satisfaction and usage metrics for three frameworks.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **`Home/components/BarChart.js`**: Bar chart component utilizing `echarts` to render charts. It accepts a `title` prop to dynamically set the chart title.
 
-### Code Splitting
+- **`Layout/index.js`**: Layout component that contains the sidebar navigation and header with user information.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  - **Navigation Menu**: Highlights menu items based on the current route.
+  - **Logout**: Includes a logout confirmation option that clears user information.
 
-### Analyzing the Bundle Size
+- **`Login/index.js`**: Login page, containing a form with fields for phone number and verification code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  - **Login Logic**: Submits the form data through `fetchLogin` asynchronous action, and on success, redirects to the home page.
 
-### Making a Progressive Web App
+- **`Publish/index.js`**: Article publishing page, allowing for creating or editing an article.
+  - **Form Submission**: Collects data like title, content, channel, and cover image type.
+  - **Image Upload**: Allows the user to choose the cover type and upload images.
+  - **Edit Mode**: In edit mode, it auto-populates article data and cover images for convenience.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 6. Router (`src/router`)
 
-### Advanced Configuration
+- **`index.js`**: Configures routing for the app, including routes for Home, Article Management, Publish, and Login pages.
+  - **Lazy Loading**: Implements lazy loading for page components using `React.lazy` for performance optimization.
+  - **Route Protection**: Wraps protected routes with `AuthRoute`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 7. State Management (`src/store`)
 
-### Deployment
+- **`index.js`**: Configures the Redux store, integrating user-related modules.
+- **`modules/user.js`**: Manages user-related state and operations.
+  - **State**: Includes `token` and `userInfo`.
+  - **Synchronous Actions**:
+    - `setToken`: Sets the user token.
+    - `setUserInfo`: Stores user information.
+    - `clearUserInfo`: Clears both token and user information.
+  - **Asynchronous Actions**:
+    - `fetchLogin`: Authenticates the user through an API call and stores the token.
+    - `fetchUserInfo`: Retrieves and stores user information.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 8. Utilities (`src/utils`)
 
-### `npm run build` fails to minify
+- **`index.js`**: Exports utility modules for easy access and management.
+- **`request.js`**: Wraps `axios` with request and response interceptors.
+  - **Request Interceptor**: Adds the token to the request headers.
+  - **Response Interceptor**: Handles response data, particularly monitoring for 401 errors to manage logouts.
+- **`token.js`**: Manages token storage, retrieval, and deletion.
+  - `setToken`: Saves the token to `localStorage`.
+  - `getToken`: Retrieves the token from `localStorage`.
+  - `removeToken`: Deletes the token from `localStorage`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
